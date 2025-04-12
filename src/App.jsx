@@ -12,6 +12,8 @@ function App() {
   const [xTurn, setXTurn] = useState(true);
   const [squares, setSquaresValue] = useState(Array(9).fill(null));
 
+  let status = "Current Player: " + (xTurn ? "X" : "O");
+
   function onSquareClicked(i) {
     if (squares[i]) {
       return;
@@ -31,6 +33,7 @@ function App() {
 
   return (
     <>
+      <div className="status">{status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClicked={() => onSquareClicked(0)} />
         <Square value={squares[1]} onSquareClicked={() => onSquareClicked(1)} />

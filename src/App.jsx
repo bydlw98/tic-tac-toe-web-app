@@ -31,6 +31,11 @@ function App() {
     setXTurn(!xTurn);
   }
 
+  const winner = calculateWinner(squares);
+  if (winner) {
+    status = "Winner: " + winner;
+  }
+
   return (
     <>
       <div className="status">{status}</div>
@@ -51,6 +56,32 @@ function App() {
       </div>
     </>
   );
+}
+
+function calculateWinner(squares) {
+  const winRows = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [6, 4, 2],
+  ];
+
+  for (let i = 0; i < winRows.length; i++) {
+    const [a, b, c] = winRows[i];
+    if (
+      squares[a] === squares[b] &&
+      squares[a] === squares[c] &&
+      squares[a] !== null
+    ) {
+      return squares[a];
+    }
+  }
+
+  return null;
 }
 
 export default App;

@@ -12,14 +12,27 @@ function App() {
   const [xTurn, setXTurn] = useState(true);
   const [squares, setSquaresValue] = useState(Array(9).fill(null));
 
-  let status = "Current Player: " + (xTurn ? "X" : "O");
+  let status;
+  const winner = calculateWinner(squares);
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Current Player: " + (xTurn ? "X" : "O");
+  }
 
   function onSquareClicked(i) {
-    if (squares[i]) {
-      return;
+    let nextSquares;
+
+    // Reset game if square is clicked after a win
+    if (winner) {
+      nextSquares = Array(9).fill(null);
+    } else {
+      nextSquares = squares.slice();
     }
 
-    const nextSquares = squares.slice();
+    if (nextSquares[i]) {
+      return;
+    }
 
     if (xTurn) {
       nextSquares[i] = "X";
@@ -29,11 +42,6 @@ function App() {
 
     setSquaresValue(nextSquares);
     setXTurn(!xTurn);
-  }
-
-  const winner = calculateWinner(squares);
-  if (winner) {
-    status = "Winner: " + winner;
   }
 
   return (

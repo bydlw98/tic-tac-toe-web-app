@@ -10,4 +10,3 @@ Based on [tutorial tic-tac-toe](https://react.dev/learn/tutorial-tic-tac-toe).
 npm install
 npm run dev
 ```
-
